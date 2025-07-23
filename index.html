@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced QR & Bar Code Generator - Free, Fast & Customizable</title>
+    <meta name="description" content="Create highly customizable QR codes for WiFi, vCards, text, URLs, emails, SMS, phone numbers, locations, events, PayPal, Bitcoin, and app downloads. Generate barcodes for various data types. Our free online QR code generator offers advanced design options including custom colors, gradients, dot styles, corner styles, logo integration, and adjustable resolution for high-quality PNG, SVG, and JPG downloads. Generate advanced QR codes for marketing, business, personal use, and more. Fast, easy, and secure QR code creation.">
+    <meta name="keywords" content="advanced QR code generator, free QR code maker, customizable QR code, QR code for WiFi, vCard QR code, email QR code, SMS QR code, phone QR code, location QR code, event QR code, PayPal QR code, Bitcoin QR code, app download QR code, QR code colors, gradient QR code, high resolution QR code, PNG QR code, SVG QR code, JPG QR code, online QR generator, QR code for business, marketing QR code, secure QR code, custom QR code, best QR code generator, barcode generator, free barcode maker, customizable barcode, EAN-13, UPC-A, Code 128, Code 39, ISBN, QR and Barcode">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta property="og:title" content="Advanced QR & Bar Code Generator - Create Free & Customizable QR Codes">
+    <meta property="og:description" content="Create highly customizable QR codes for WiFi, vCards, text, URLs, emails, SMS, phone numbers, locations, events, PayPal, Bitcoin, and app downloads. Generate barcodes for various data types. Our free online QR code generator offers advanced design options including custom colors, gradients, dot styles, corner styles, logo integration, and adjustable resolution for high-quality PNG, SVG, and JPG downloads. Generate advanced QR codes for marketing, business, personal use, and more. Fast, easy, and secure QR code creation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://advancedqrcodegenerator.xyz/">
+    <meta property="og:image" content="https://advancedqrcodegenerator.xyz/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="bn_BD">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+    
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.min.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content container">
+            <div class="logo">
+                <a href="#">Qr Sheba</a>
+            </div>
+            <nav class="main-nav">
+                <a href="#" class="nav-link">হোম</a>
+                <a href="#" class="nav-link">বৈশিষ্ট্য</a>
+                <a href="#" class="nav-link">মূল্য</a>
+                <a href="#" class="nav-link">যোগাযোগ</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <div class="container hero-content">
+            <h1>আপনার কাস্টম QR কোড এবং বারকোড তৈরি করুন</h1>
+            <p>দ্রুত, সহজ এবং আপনার প্রয়োজন অনুযায়ী ডিজাইন করুন।</p>
+        </div>
+    </div>
+
+    <div class="generator-container container">
+        <div class="generator-steps">
+            <div class="step-indicator" id="step-1-indicator">
+                <span>1</span><p>ডেটা প্রকার</p>
+            </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" id="step-2-indicator">
+                <span>2</span><p>ইনপুট ডেটা</p>
+            </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" id="step-3-indicator">
+                <span>3</span><p>ডিজাইন</p>
+            </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" id="step-4-indicator">
+                <span>4</span><p>ডাউনলোড</p>
+            </div>
+        </div>
+
+        <div class="generator-panels">
+            <div class="left-panel">
+                <div id="step-1" class="step-panel active">
+                    <h2>১. ডেটা প্রকার নির্বাচন করুন</h2>
+                    <div class="qr-type-grid">
+                        <div class="qr-type-card active" data-type="text-url">
+                            <i class="fas fa-link"></i>
+                            <h3>লিঙ্ক / টেক্সট</h3>
+                            <p>ওয়েবসাইট URL বা সাধারণ টেক্সট</p>
+                        </div>
+                        <div class="qr-type-card" data-type="wifi">
+                            <i class="fas fa-wifi"></i>
+                            <h3>Wi-Fi</h3>
+                            <p>নেটওয়ার্কের বিবরণ</p>
+                        </div>
+                        <div class="qr-type-card" data-type="vcard">
+                            <i class="fas fa-address-book"></i>
+                            <h3>vCard</h3>
+                            <p>যোগাযোগের তথ্য</p>
+                        </div>
+                        <div class="qr-type-card" data-type="email">
+                            <i class="fas fa-envelope"></i>
+                            <h3>ইমেইল</h3>
+                            <p>ইমেইল ঠিকানা এবং বিষয়</p>
+                        </div>
+                        <div class="qr-type-card" data-type="sms">
+                            <i class="fas fa-sms"></i>
+                            <h3>SMS</h3>
+                            <p>ফোন নম্বর ও বার্তা</p>
+                        </div>
+                        <div class="qr-type-card" data-type="phone">
+                            <i class="fas fa-phone"></i>
+                            <h3>ফোন</h3>
+                            <p>সরাসরি ফোন কল</p>
+                        </div>
+                        <div class="qr-type-card" data-type="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>লোকেশন</h3>
+                            <p>ভূ-অবস্থান ডেটা</p>
+                        </div>
+                        <div class="qr-type-card" data-type="event">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>ইভেন্ট</h3>
+                            <p>ক্যালেন্ডার ইভেন্ট</p>
+                        </div>
+                        <div class="qr-type-card" data-type="paypal">
+                            <i class="fab fa-paypal"></i>
+                            <h3>PayPal</h3>
+                            <p>PayPal পেমেন্ট</p>
+                        </div>
+                        <div class="qr-type-card" data-type="bitcoin">
+                            <i class="fab fa-bitcoin"></i>
+                            <h3>Bitcoin</h3>
+                            <p>Bitcoin ঠিকানা</p>
+                        </div>
+                        <div class="qr-type-card" data-type="app-download">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>অ্যাপ ডাউনলোড</h3>
+                            <p>অ্যাপ স্টোর লিংক</p>
+                        </div>
+                        <div class="qr-type-card" data-type="barcode">
+                            <i class="fas fa-barcode"></i>
+                            <h3>বারকোড</h3>
+                            <p>বিভিন্ন প্রকারের বারকোড</p>
+                        </div>
+                    </div>
+                    <button class="next-step-btn primary-btn" data-step="1">পরবর্তী ধাপ <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div id="step-2" class="step-panel">
+                    <h2>২. আপনার ডেটা ইনপুট করুন</h2>
+                    <div class="input-form">
+                        <div id="text-url-tab" class="data-input-tab active">
+                            <h3><i class="fas fa-link"></i> লিঙ্ক / টেক্সট</h3>
+                            <input type="text" id="text-url-input" placeholder="আপনার লিঙ্ক বা টেক্সট লিখুন">
+                        </div>
+
+                        <div id="wifi-tab" class="data-input-tab">
+                            <h3><i class="fas fa-wifi"></i> Wi-Fi QR কোড তৈরি করুন</h3>
+                            <input type="text" id="wifi-ssid" placeholder="নেটওয়ার্ক নাম (SSID)">
+                            <input type="password" id="wifi-password" placeholder="পাসওয়ার্ড (যদি থাকে)">
+                            <select id="wifi-encryption">
+                                <option value="WPA/WPA2">WPA/WPA2</option>
+                                <option value="WEP">WEP</option>
+                                <option value="NONE">কোনোটি নয়</option>
+                            </select>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="wifi-hidden">
+                                লুকানো নেটওয়ার্ক
+                            </label>
+                        </div>
+
+                        <div id="vcard-tab" class="data-input-tab">
+                            <h3><i class="fas fa-address-book"></i> vCard (যোগাযোগ) QR কোড</h3>
+                            <input type="text" id="vcard-firstname" placeholder="প্রথম নাম">
+                            <input type="text" id="vcard-lastname" placeholder="শেষ নাম">
+                            <input type="text" id="vcard-organization" placeholder="সংস্থা">
+                            <input type="text" id="vcard-title" placeholder="পদবি">
+                            <input type="tel" id="vcard-phone" placeholder="ফোন নম্বর">
+                            <input type="email" id="vcard-email" placeholder="ইমেইল">
+                            <input type="text" id="vcard-address" placeholder="ঠিকানা">
+                            <input type="text" id="vcard-website" placeholder="ওয়েবসাইট">
+                        </div>
+
+                        <div id="email-tab" class="data-input-tab">
+                            <h3><i class="fas fa-envelope"></i> ইমেইল QR কোড</h3>
+                            <input type="email" id="email-to" placeholder="প্রাপকের ইমেইল">
+                            <input type="text" id="email-subject" placeholder="বিষয়">
+                            <textarea id="email-body" placeholder="ইমেইলের বিষয়বস্তু"></textarea>
+                        </div>
+
+                        <div id="sms-tab" class="data-input-tab">
+                            <h3><i class="fas fa-sms"></i> SMS QR কোড</h3>
+                            <input type="tel" id="sms-phone" placeholder="ফোন নম্বর">
+                            <textarea id="sms-message" placeholder="SMS বার্তা"></textarea>
+                        </div>
+
+                        <div id="phone-tab" class="data-input-tab">
+                            <h3><i class="fas fa-phone"></i> ফোন নম্বর QR কোড</h3>
+                            <input type="tel" id="phone-number" placeholder="ফোন নম্বর">
+                        </div>
+
+                        <div id="location-tab" class="data-input-tab">
+                            <h3><i class="fas fa-map-marker-alt"></i> লোকেশন QR কোড</h3>
+                            <input type="text" id="location-latitude" placeholder="অক্ষাংশ (Latitude)">
+                            <input type="text" id="location-longitude" placeholder="দ্রাঘিমাংশ (Longitude)">
+                        </div>
+
+                        <div id="event-tab" class="data-input-tab">
+                            <h3><i class="fas fa-calendar-alt"></i> ইভেন্ট QR কোড</h3>
+                            <input type="text" id="event-title" placeholder="ইভেন্টের নাম">
+                            <input type="text" id="event-location" placeholder="ইভেন্টের স্থান">
+                            <label for="event-start">শুরুর সময়:</label>
+                            <input type="datetime-local" id="event-start">
+                            <label for="event-end">শেষের সময়:</label>
+                            <input type="datetime-local" id="event-end">
+                            <textarea id="event-description" placeholder="ইভেন্টের বিবরণ"></textarea>
+                        </div>
+
+                        <div id="paypal-tab" class="data-input-tab">
+                            <h3><i class="fab fa-paypal"></i> PayPal QR কোড</h3>
+                            <input type="email" id="paypal-email" placeholder="PayPal ইমেইল">
+                            <input type="number" id="paypal-amount" placeholder="পরিমাণ" step="0.01">
+                            <input type="text" id="paypal-item" placeholder="পণ্যের নাম (ঐচ্ছিক)">
+                        </div>
+
+                        <div id="bitcoin-tab" class="data-input-tab">
+                            <h3><i class="fab fa-bitcoin"></i> Bitcoin QR কোড</h3>
+                            <input type="text" id="bitcoin-address" placeholder="Bitcoin ঠিকানা">
+                            <input type="number" id="bitcoin-amount" placeholder="পরিমাণ (BTC)" step="0.00000001">
+                            <input type="text" id="bitcoin-message" placeholder="বার্তা (ঐচ্ছিক)">
+                        </div>
+
+                        <div id="app-download-tab" class="data-input-tab">
+                            <h3><i class="fas fa-mobile-alt"></i> অ্যাপ ডাউনলোড QR কোড</h3>
+                            <input type="text" id="app-android-url" placeholder="অ্যান্ড্রয়েড অ্যাপ লিঙ্ক (Play Store)">
+                            <input type="text" id="app-ios-url" placeholder="iOS অ্যাপ লিঙ্ক (App Store)">
+                        </div>
+
+                        <div id="barcode-tab" class="data-input-tab">
+                            <h3><i class="fas fa-barcode"></i> বারকোড তৈরি করুন</h3>
+                            <select id="barcode-type">
+                                <option value="CODE128">CODE128</option>
+                                <option value="EAN13">EAN13</option>
+                                <option value="UPC">UPC</option>
+                                <option value="CODE39">CODE39</option>
+                                <option value="ITF14">ITF14</option>
+                                <option value="MSI">MSI</option>
+                                <option value="Pharmacode">Pharmacode</option>
+                            </select>
+                            <input type="text" id="barcode-data" placeholder="বারকোডের ডেটা লিখুন (যেমন: 123456789012)">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="barcode-display-value">
+                                মান প্রদর্শন করুন
+                            </label>
+                        </div>
+                    </div>
+                    <div class="step-nav-buttons">
+                        <button class="prev-step-btn secondary-btn" data-step="2"><i class="fas fa-arrow-left"></i> পূর্ববর্তী ধাপ</button>
+                        <button class="next-step-btn primary-btn" data-step="2">পরবর্তী ধাপ <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <div id="step-3" class="step-panel">
+                    <h2>৩. আপনার QR কোড ডিজাইন করুন</h2>
+                    <div class="design-options-grid">
+                        <div class="design-group">
+                            <h4>রঙ</h4>
+                            <label for="qr-color">QR কোড রঙ:</label>
+                            <input type="color" id="qr-color" value="#000000">
+
+                            <label for="qr-bg-color">পটভূমির রঙ:</label>
+                            <input type="color" id="qr-bg-color" value="#ffffff">
+                        </div>
+
+                        <div class="design-group">
+                            <h4>স্টাইল</h4>
+                            <label for="qr-dot-style">ডট স্টাইল:</label>
+                            <select id="qr-dot-style">
+                                <option value="square">Square</option>
+                                <option value="dots">Dots</option>
+                                <option value="rounded">Rounded</option>
+                            </select>
+
+                            <label for="qr-corner-style">কর্নার স্টাইল:</label>
+                            <select id="qr-corner-style">
+                                <option value="square">Square</option>
+                                <option value="dot">Dot</option>
+                                <option value="extra-rounded">Extra Rounded</option>
+                            </select>
+                        </div>
+                        
+                        <div class="design-group">
+                            <h4>গ্র্যাডিয়েন্ট (ঐচ্ছিক)</h4>
+                            <label for="qr-gradient-type">গ্র্যাডিয়েন্ট প্রকার:</label>
+                            <select id="qr-gradient-type">
+                                <option value="none">None</option>
+                                <option value="linear">Linear</option>
+                                <option value="radial">Radial</option>
+                            </select>
+                            <label for="qr-gradient-color1">রঙ 1:</label>
+                            <input type="color" id="qr-gradient-color1" value="#000000">
+                            <label for="qr-gradient-color2">রঙ 2:</label>
+                            <input type="color" id="qr-gradient-color2" value="#000000">
+                        </div>
+
+                        <div class="design-group">
+                            <h4>লোগো (ঐচ্ছিক)</h4>
+                            <label for="logo-upload" class="upload-btn">লোগো আপলোড করুন <i class="fas fa-upload"></i></label>
+                            <input type="file" id="logo-upload" accept="image/*" style="display: none;">
+                            <button id="remove-logo" class="remove-btn" style="display: none;">লোগো সরান <i class="fas fa-times"></i></button>
+                        </div>
+
+                        <div class="design-group full-width" id="resolution-design-group">
+                            <h4>রেজোলিউশন</h4>
+                            <input type="range" id="qr-resolution" min="300" max="4000" value="500">
+                            <span id="resolution-display">500x500</span>
+                        </div>
+                    </div>
+                    <div class="step-nav-buttons">
+                        <button class="prev-step-btn secondary-btn" data-step="3"><i class="fas fa-arrow-left"></i> পূর্ববর্তী ধাপ</button>
+                        <button class="next-step-btn primary-btn" data-step="3">পরবর্তী ধাপ <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <div id="step-4" class="step-panel">
+                    <h2>৪. ডাউনলোড করুন</h2>
+                    <p class="download-info-text">আপনার QR কোড বা বারকোড এখন ডাউনলোডের জন্য প্রস্তুত। আপনার পছন্দের ফরম্যাট নির্বাচন করুন:</p>
+                    <div class="download-options-grid">
+                        <button id="download-btn-png" class="download-btn download-png">
+                            <i class="fas fa-file-image"></i> PNG ডাউনলোড
+                        </button>
+                        <button id="download-btn-svg" class="download-btn download-svg">
+                            <i class="fas fa-file-code"></i> SVG ডাউনলোড
+                        </button>
+                        <button id="download-btn-jpg" class="download-btn download-jpg">
+                            <i class="fas fa-file-image"></i> JPG ডাউনলোড
+                        </button>
+                    </div>
+                    <div class="step-nav-buttons">
+                        <button class="prev-step-btn secondary-btn" data-step="4"><i class="fas fa-arrow-left"></i> পূর্ববর্তী ধাপ</button>
+                        <button class="start-over-btn primary-btn">নতুন করে শুরু করুন <i class="fas fa-redo"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="qr-preview-wrapper">
+                    <div id="qr-code-canvas" class="qr-code-display"></div>
+                    <svg id="barcode-display" class="barcode-display"></svg>
+                    <div class="preview-placeholder-text">
+                        <i class="fas fa-qrcode"></i>
+                        <p>আপনার QR কোড/বারকোড এখানে প্রদর্শিত হবে।</p>
+                    </div>
+                </div>
+                <button id="show-faq-btn" class="faq-toggle-btn secondary-btn"><i class="fas fa-question-circle"></i> সাধারণ জিজ্ঞাসা (QNA)</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="faq-overlay" class="faq-overlay">
+        <div class="faq-modal">
+            <button class="faq-close-btn">&times;</button>
+            <h2>সাধারণ জিজ্ঞাসা (QNA)</h2>
+            <div class="faq-item">
+                <h3>QR কোড কি?</h3>
+                <p>QR কোড (কুইক রেসপন্স কোড) হলো এক ধরনের দ্বি-মাত্রিক বারকোড যা দ্রুত তথ্য সংরক্ষণ এবং পুনরুদ্ধারের জন্য ব্যবহৃত হয়। স্মার্টফোন বা QR কোড রিডার অ্যাপ ব্যবহার করে এটি স্ক্যান করা যায়।</p>
+            </div>
+            <div class="faq-item">
+                <h3>এই জেনারেটর ব্যবহার করে কী ধরনের QR কোড তৈরি করা যায়?</h3>
+                <p>আপনি লিঙ্ক/টেক্সট, Wi-Fi, vCard, ইমেইল, SMS, ফোন, লোকেশন, ইভেন্ট, PayPal, Bitcoin এবং অ্যাপ ডাউনলোডের জন্য QR কোড তৈরি করতে পারবেন।</p>
+            </div>
+            <div class="faq-item">
+                <h3>QR কোড কাস্টমাইজ করার জন্য কি কি অপশন আছে?</h3>
+                <p>আপনি QR কোডের রঙ, ডট স্টাইল, কর্নার স্টাইল, পটভূমির রঙ, গ্র্যাডিয়েন্ট ইফেক্ট এবং লোগো যোগ করে আপনার QR কোড কাস্টমাইজ করতে পারবেন।</p>
+            </div>
+            <div class="faq-item">
+                <h3>তৈরি করা QR কোড কোন ফরম্যাটে ডাউনলোড করা যায়?</h3>
+                <p>আপনি PNG, SVG এবং JPG ফরম্যাটে আপনার তৈরি করা QR কোড ডাউনলোড করতে পারবেন।</p>
+            </div>
+            <div class="faq-item">
+                <h3>বারকোড কি?</h3>
+                <p>বারকোড হলো এক-মাত্রিক কোড যা পণ্যের তথ্য যেমন - পণ্যের নাম, মূল্য, উৎপাদন তারিখ ইত্যাদি সংরক্ষণ করে। এটি সাধারণত লাইন এবং স্পেসের সমষ্টি হিসেবে প্রদর্শিত হয় এবং বারকোড স্ক্যানার দ্বারা পড়া হয়।</p>
+            </div>
+            <div class="faq-item">
+                <h3>কোন ধরনের বারকোড তৈরি করা যাবে?</h3>
+                <p>আপনি CODE128, EAN13, UPC, CODE39, ITF14, MSI এবং Pharmacode এর মতো জনপ্রিয় বারকোড প্রকার তৈরি করতে পারবেন।</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Advanced QR & Bar Code Generator. All rights reserved.</p>
+            <p>Developed with ❤️ by FAHIM HASAN</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
