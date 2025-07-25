@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const previewPlaceholderText = document.querySelector(".preview-placeholder-text");
 
     // Form Inputs & Controls
-    const allInputs = document.querySelectorAll('.input-form input, .input-form textarea, .input-form select');
+    const allInputs = document.querySelectorAll('.input-form input, .input-form textarea, .input-form select, .design-options-grid input, .design-options-grid select');
     const qrResolutionSlider = document.getElementById("qr-resolution");
     const resolutionDisplay = document.getElementById("resolution-display");
     const logoUpload = document.getElementById("logo-upload");
