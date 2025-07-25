@@ -1,22 +1,22 @@
 /* Core Styles & Variables */
 :root {
-    --primary-blue: #007bff; /* A vibrant blue for primary actions */
-    --primary-green: #28a745; /* A complementary green */
-    --accent-color: #6f42c1; /* A rich purple for accents */
-    --text-dark: #343a40; /* Dark text for readability */
-    --text-light: #6c757d; /* Lighter text for descriptions */
-    --bg-light: #f8f9fa; /* Light background for sections */
-    --border-light: #e9ecef; /* Light border for elements */
-    --shadow-light: rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
-    --shadow-medium: rgba(0, 0, 0, 0.15); /* Medium shadow for interactive elements */
+    --primary-blue: #007bff;
+    --primary-green: #28a745;
+    --accent-color: #6f42c1;
+    --text-dark: #343a40;
+    --text-light: #6c757d;
+    --bg-light: #f8f9fa;
+    --border-light: #e9ecef;
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
     --border-radius-small: 8px;
     --border-radius-medium: 12px;
-    --border-radius-large: 25px; /* For pills and large buttons */
+    --border-radius-large: 25px;
     --font-primary: 'Poppins', sans-serif;
     --font-secondary: 'Noto Sans Bengali', sans-serif;
 }
 
-/* Universal Box-Sizing (Crucial for consistent responsiveness) */
+/* Universal Box-Sizing */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -24,7 +24,7 @@
 }
 
 body {
-    overflow-x: hidden; /* Prevents horizontal overflow */
+    overflow-x: hidden;
 }
 
 /* Base HTML & Body Styles */
@@ -47,8 +47,6 @@ body {
     max-width: 100%;
     overflow-x: hidden;
 }
-
-/* Rest of your CSS remains the same */
 
 /* Utility Classes */
 .container {
@@ -167,7 +165,7 @@ body {
     align-items: center;
     margin-bottom: 30px;
     position: relative;
-    padding: 0 20px; /* Add padding to ensure lines don't touch edges */
+    padding: 0 20px;
 }
 
 .step-indicator {
@@ -229,12 +227,12 @@ body {
     position: absolute;
     height: 4px;
     background-color: var(--border-light);
-    left: 0; /* Adjusted to fill the gap */
-    right: 0; /* Adjusted to fill the gap */
+    left: 0;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
     z-index: 0;
-    margin: 0 40px; /* Adjust margin to start and end between indicators */
+    margin: 0 40px;
 }
 
 /* Generator Panels */
@@ -264,9 +262,9 @@ body {
     border-radius: var(--border-radius-medium);
     box-shadow: 0 5px 20px var(--shadow-light);
     position: sticky;
-    top: 100px; /* Adjust based on header height */
-    align-self: flex-start; /* Keeps it at the top */
-    height: fit-content; /* Ensure the panel itself adjusts its height */
+    top: 100px;
+    align-self: flex-start;
+    height: fit-content;
 }
 
 /* Step Panels */
@@ -313,7 +311,7 @@ body {
 
 .qr-type-card.active {
     border-color: var(--primary-blue);
-    background-color: #e6f2ff; /* Light blue background for active */
+    background-color: #e6f2ff;
     box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
 }
 
@@ -367,13 +365,13 @@ body {
     padding: 12px 18px;
     margin-bottom: 15px;
     border: 1px solid var(--border-light);
-    border-radius: var(--border-radius-large); /* Rounded inputs */
+    border-radius: var(--border-radius-large);
     font-size: 1em;
     color: var(--text-dark);
     background-color: white;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    box-sizing: border-box; /* Include padding in width */
+    box-sizing: border-box;
 }
 
 .input-form input:focus,
@@ -426,7 +424,7 @@ body {
 }
 
 .checkbox-container input[type="checkbox"]:checked::after {
-    content: '\2713'; /* Checkmark */
+    content: '\2713';
     font-size: 14px;
     color: white;
     position: absolute;
@@ -449,6 +447,10 @@ body {
     border-radius: var(--border-radius-small);
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.design-group.hidden {
+    display: none;
 }
 
 .design-group h4 {
@@ -573,6 +575,53 @@ body {
     box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
 }
 
+/* Barcode specific design options */
+.barcode-design-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-small);
+}
+
+.barcode-design-options .input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.barcode-design-options label {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: var(--text-light);
+}
+
+.barcode-design-options input[type="number"],
+.barcode-design-options input[type="color"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: var(--border-radius-small);
+    border: 1px solid var(--border-light);
+}
+
+.barcode-design-options input[type="color"] {
+    height: 40px;
+    padding: 3px;
+}
+
+.input-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.input-group span {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--text-light);
+    margin-top: 5px;
+}
+
+
 /* Download Options (Step 4) */
 .download-info-text {
     text-align: center;
@@ -613,7 +662,7 @@ body {
 }
 .download-jpg {
     background: linear-gradient(45deg, #ffc107, #ffde59);
-    color: var(--text-dark); /* Adjust for better contrast */
+    color: var(--text-dark);
 }
 
 .download-btn:hover {
@@ -680,7 +729,7 @@ body {
 
 /* QR Preview Panel (Right Panel) */
 .qr-preview-wrapper {
-    width: 100%; /* Take full width of its parent (right-panel) */
+    width: 100%;
     background-color: white;
     border: 2px dashed var(--border-light);
     border-radius: var(--border-radius-medium);
@@ -688,33 +737,43 @@ body {
     justify-content: center;
     align-items: center;
     margin-bottom: 25px;
-    /* overflow: hidden;  এই লাইনটি সরিয়ে দিন */
     box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
-    min-height: 200px; /* সর্বনিম্ন উচ্চতা */
+    min-height: 200px;
     min-width: 200px;
-    padding: 10px; /* ভিতরের দিকে কিছুটা প্যাডিং */
-    /* height: 350px;  এই লাইনটি সরিয়ে দিন */
-    /* max-height: 400px;  এই লাইনটি যদি থাকে তবে সরিয়ে দিন, অথবা প্রয়োজন বুঝে বাড়ান */
-    aspect-ratio: 1 / 1; /* প্রিভিউ বক্সকে বর্গাকার রাখুন */
+    padding: 10px;
+    aspect-ratio: 1 / 1;
+    transition: all 0.3s ease;
 }
 
-/* নিশ্চিত করুন যে QRCodeStyling দ্বারা তৈরি ক্যানভাস/SVG এলিমেন্ট স্কেল করে */
-#qr-code-canvas { /* এটি সেই div যেখানে QR কোড ক্যানভাস/svg যুক্ত করা হয় */
+/* New style for barcode preview */
+.qr-preview-wrapper.barcode-mode {
+    aspect-ratio: auto;
+    height: auto;
+    min-height: 150px; /* A smaller min-height for barcode */
+    padding: 20px;
+}
+
+#barcode-display {
+    max-width: 100%;
+    height: auto;
+}
+
+#qr-code-canvas {
     width: 100%;
-    height: auto; /* তার প্যারেন্টের সম্পূর্ণ উচ্চতা না নিয়ে কন্টেন্টের উপর নির্ভর করবে */
-    display: flex; /* এর ভিতরের কন্টেন্ট সেন্টারে আনার জন্য */
+    height: auto;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#qr-code-canvas canvas, /* লাইব্রেরি দ্বারা তৈরি ক্যানভাস এলিমেন্টকে টার্গেট করুন */
-#qr-code-canvas svg { /* লাইব্রেরি দ্বারা তৈরি svg এলিমেন্টকে টার্গেট করুন */
-    max-width: 100%; /* নিশ্চিত করুন যে এটি তার সরাসরি প্যারেন্টের (#qr-code-canvas) বাইরে না যায় */
-    max-height: 100%; /* নিশ্চিত করুন যে এটি তার সরাসরি প্যারেন্টের (#qr-code-canvas) বাইরে না যায় */
-    width: auto !important; /* লাইব্রেরির ইনলাইন width অ্যাট্রিবিউট ওভাররাইড করুন */
-    height: auto !important; /* লাইব্রেরির ইনলাইন height অ্যাট্রিবিউট ওভাররাইড করুন */
-    display: block; /* সঠিক সেন্টারিং এবং অতিরিক্ত স্পেস এড়াতে এটি জরুরি */
-    object-fit: contain; /* অ্যাসপেক্ট রেশিও বজায় রেখে চিত্রকে ফিট করার জন্য স্কেল করুন */
+#qr-code-canvas canvas,
+#qr-code-canvas svg {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    object-fit: contain;
 }
 
 
@@ -849,7 +908,7 @@ body {
     background-color: var(--text-dark);
     color: white;
     padding: 30px 0;
-    margin-top: auto; /* Pushes footer to the bottom */
+    margin-top: auto;
 }
 
 .footer-content {
@@ -858,7 +917,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-    text-align: center; /* For smaller screens */
+    text-align: center;
 }
 
 .site-footer p {
@@ -899,9 +958,8 @@ body {
     }
 
     .qr-preview-wrapper {
-        max-width: 100%; /* Allow full width, but contained by parent */
-        height: auto; /* Adjust height for smaller screens if needed */
-        aspect-ratio: 1 / 1; /* Maintain aspect ratio */
+        max-width: 100%;
+        height: auto;
     }
     
     .hero-section h1 {
@@ -926,7 +984,7 @@ body {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 60px; /* Below header */
+        top: 60px;
         left: 0;
         width: 100%;
         background: linear-gradient(90deg, var(--primary-blue), var(--accent-color));
@@ -984,7 +1042,8 @@ body {
         font-size: 0.75em;
     }
 
-    .design-options-grid {
+    .design-options-grid,
+    .barcode-design-options {
         grid-template-columns: 1fr;
     }
 
