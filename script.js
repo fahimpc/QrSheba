@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoUpload = document.getElementById("logo-upload");
     const removeLogoBtn = document.getElementById("remove-logo");
 
+    // New Currency Select Elements
+    const bitcoinCurrency = document.getElementById("bitcoin-currency");
+    const paypalCurrency = document.getElementById("paypal-currency");
+
     // Download Buttons
     const downloadPngBtn = document.getElementById("download-btn-png");
     const downloadSvgBtn = document.getElementById("download-btn-svg");
@@ -216,15 +220,45 @@ document.addEventListener("DOMContentLoaded", () => {
                 const paypalEmail = document.getElementById("paypal-email").value;
                 const paypalAmount = document.getElementById("paypal-amount").value;
                 const paypalItem = encodeURIComponent(document.getElementById("paypal-item").value);
+                const selectedPaypalCurrency = paypalCurrency.value; // Get selected currency
                 if (!paypalEmail && !paypalAmount && !paypalItem) return "";
-                data = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=${paypalEmail}&amount=${paypalAmount}&item_name=${paypalItem}`;
+                data = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=${encodeURIComponent(paypalEmail)}`;
+                if (paypalAmount) {
+                    data += `&amount=${encodeURIComponent(paypalAmount)}`;
+                }
+                data += `&currency_code=${encodeURIComponent(selectedPaypalCurrency)}`; // Add currency code
+                if (paypalItem) {
+                    data += `&item_name=${paypalItem}`;
+                }
                 break;
             case 'bitcoin':
                 const bitcoinAddress = document.getElementById("bitcoin-address").value;
                 const bitcoinAmount = document.getElementById("bitcoin-amount").value;
                 const bitcoinMessage = encodeURIComponent(document.getElementById("bitcoin-message").value);
+                const selectedBitcoinCurrency = bitcoinCurrency.value; // Get selected currency (for display/context)
+
                 if (!bitcoinAddress && !bitcoinAmount && !bitcoinMessage) return "";
-                data = `bitcoin:${bitcoinAddress}?amount=${bitcoinAmount}&message=${bitcoinMessage}`;
+                
+                let bitcoinData = `bitcoin:${bitcoinAddress}`;
+                const params = [];
+                if (bitcoinAmount) {
+                    // Bitcoin amount should technically be in BTC for the URI.
+                    // If bitcoinAmount is in fiat and needs conversion, that logic
+                    // would go here (e.g., using a crypto exchange rate API).
+                    // For now, assuming bitcoinAmount is either BTC or for display.
+                    params.push(`amount=${bitcoinAmount}`);
+                }
+                if (bitcoinMessage) {
+                    params.push(`message=${bitcoinMessage}`);
+                }
+                // If you want to include the selected fiat currency for *display purposes*
+                // within the QR code (e.g., in the label), you could modify label here.
+                // Ex: if (selectedBitcoinCurrency && bitcoinAmount) { params.push(`label=Amount: ${bitcoinAmount} ${selectedBitcoinCurrency}`); }
+
+                if (params.length > 0) {
+                    bitcoinData += `?${params.join('&')}`;
+                }
+                data = bitcoinData;
                 break;
             case 'app-download':
                 const androidUrl = document.getElementById("app-android-url").value;
@@ -311,12 +345,14 @@ document.addEventListener("DOMContentLoaded", () => {
             delete options.cornersDotOptions.gradient;
         }
 
-        if (qrCodeInstance) {
-            qrCodeInstance.update(options);
-        } else {
-            qrCodeInstance = new QRCodeStyling(options);
-            qrCodeInstance.append(qrCodeContainer);
-        }
+        if (!qrCodeInstance) {
+    qrCodeInstance = new QRCodeStyling(options);
+    qrCodeContainer.innerHTML = ''; // পূর্বের ক্যানভাস মুছে দিন
+    qrCodeInstance.append(qrCodeContainer);
+       } else {
+    qrCodeInstance.update(options);
+    }
+
     }
 
     // Barcode Generation
@@ -492,6 +528,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
+
+    // Add event listeners for new currency selects
+    if (bitcoinCurrency) { // Check if element exists before adding listener
+        bitcoinCurrency.addEventListener('change', generateCode);
+    }
+    if (paypalCurrency) { // Check if element exists before adding listener
+        paypalCurrency.addEventListener('change', generateCode);
+    }
 
     // Debounce function for better performance on slider input
     function debounce(func, delay) {
