@@ -213,6 +213,36 @@
                             <h3><i class="fab fa-paypal"></i> PayPal QR কোড</h3>
                             <input type="email" id="paypal-email" placeholder="PayPal ইমেইল">
                             <input type="number" id="paypal-amount" placeholder="পরিমাণ" step="0.01">
+                            <div class="input-group">
+                                <label for="paypal-currency">মুদ্রা নির্বাচন করুন:</label>
+                                <select id="paypal-currency" class="input-field">
+                                    <option value="AUD">AUD - Australian Dollar</option>
+                                    <option value="BRL">BRL - Brazilian Real</option>
+                                    <option value="CAD">CAD - Canadian Dollar</option>
+                                    <option value="CZK">CZK - Czech Koruna</option>
+                                    <option value="DKK">DKK - Danish Krone</option>
+                                    <option value="EUR">EUR - Euro</option>
+                                    <option value="HKD">HKD - Hong Kong Dollar</option>
+                                    <option value="HUF">HUF - Hungarian Forint</option>
+                                    <option value="INR">INR - Indian Rupee</option>
+                                    <option value="ILS">ILS - Israeli New Shekel</option>
+                                    <option value="JPY">JPY - Japanese Yen</option>
+                                    <option value="MYR">MYR - Malaysian Ringgit</option>
+                                    <option value="MXN">MXN - Mexican Peso</option>
+                                    <option value="TWD">TWD - New Taiwan Dollar</option>
+                                    <option value="NZD">NZD - New Zealand Dollar</option>
+                                    <option value="NOK">NOK - Norwegian Krone</option>
+                                    <option value="PHP">PHP - Philippine Peso</option>
+                                    <option value="PLN">PLN - Polish Zloty</option>
+                                    <option value="GBP">GBP - Pound Sterling</option>
+                                    <option value="SGD">SGD - Singapore Dollar</option>
+                                    <option value="SEK">SEK - Swedish Krona</option>
+                                    <option value="CHF">CHF - Swiss Franc</option>
+                                    <option value="THB">THB - Thai Baht</option>
+                                    <option value="USD" selected>USD - United States Dollar</option>
+                                    <option value="BDT">BDT - Bangladeshi Taka</option>
+                                    </select>
+                            </div>
                             <input type="text" id="paypal-item" placeholder="পণ্যের নাম (ঐচ্ছিক)">
                         </div>
 
@@ -220,6 +250,21 @@
                             <h3><i class="fab fa-bitcoin"></i> Bitcoin QR কোড</h3>
                             <input type="text" id="bitcoin-address" placeholder="Bitcoin ঠিকানা">
                             <input type="number" id="bitcoin-amount" placeholder="পরিমাণ (BTC)" step="0.00000001">
+                            <div class="input-group">
+                                <label for="bitcoin-currency">মুদ্রা নির্বাচন করুন:</label>
+                                <select id="bitcoin-currency" class="input-field">
+                                    <option value="USD">USD - মার্কিন ডলার</option>
+                                    <option value="EUR">EUR - ইউরো</option>
+                                    <option value="GBP">GBP - ব্রিটিশ পাউন্ড</option>
+                                    <option value="JPY">JPY - জাপানি ইয়েন</option>
+                                    <option value="CAD">CAD - কানাডিয়ান ডলার</option>
+                                    <option value="AUD">AUD - অস্ট্রেলিয়ান ডলার</option>
+                                    <option value="CHF">CHF - সুইস ফ্রাঙ্ক</option>
+                                    <option value="CNY">CNY - চীনা ইউয়ান</option>
+                                    <option value="INR">INR - ভারতীয় রুপি</option>
+                                    <option value="BDT" selected>BDT - বাংলাদেশী টাকা</option>
+                                    </select>
+                            </div>
                             <input type="text" id="bitcoin-message" placeholder="বার্তা (ঐচ্ছিক)">
                         </div>
 
