@@ -40,7 +40,7 @@
                 <a href="#" class="nav-link">মূল্য</a>
                 <a href="https://wa.me/+8801787882701" class="nav-link">যোগাযোগ</a>
             </nav>
-            <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
         </div>
     </header>
 
@@ -286,8 +286,34 @@
                                 <option value="Pharmacode">Pharmacode</option>
                             </select>
                             <input type="text" id="barcode-data" placeholder="বারকোডের ডেটা লিখুন (যেমন: 123456789012)">
+                            
+                            <div class="barcode-design-options">
+                                <div class="input-group">
+                                    <label for="barcode-width">বারের প্রস্থ (px):</label>
+                                    <input type="number" id="barcode-width" value="2" min="1" max="10">
+                                </div>
+                                <div class="input-group">
+                                    <label for="barcode-height">উচ্চতা (px):</label>
+                                    <input type="number" id="barcode-height" value="100" min="20" max="300">
+                                </div>
+                                <div class="input-group">
+                                    <label for="barcode-line-color">বারের রঙ:</label>
+                                    <input type="color" id="barcode-line-color" value="#000000">
+                                </div>
+                                <div class="input-group">
+                                    <label for="barcode-bg-color">পটভূমির রঙ:</label>
+                                    <input type="color" id="barcode-bg-color" value="#ffffff">
+                                </div>
+                        
+                                <div class="input-group full-width">
+                                    <label for="barcode-quality">ডাউনলোড কোয়ালিটি:</label>
+                                    <input type="range" id="barcode-quality" min="1" max="10" value="1">
+                                    <span id="barcode-quality-display">1x</span>
+                                </div>
+                            </div>
+                        
                             <label class="checkbox-container">
-                                <input type="checkbox" id="barcode-display-value">
+                                <input type="checkbox" id="barcode-display-value" checked>
                                 মান প্রদর্শন করুন
                             </label>
                         </div>
@@ -299,9 +325,9 @@
                 </div>
 
                 <div id="step-3" class="step-panel">
-                    <h2>৩. আপনার QR কোড ডিজাইন করুন</h2>
+                    <h2>৩. আপনার ডিজাইন কাস্টমাইজ করুন</h2>
                     <div class="design-options-grid">
-                        <div class="design-group">
+                        <div class="design-group qr-design-option">
                             <h4>রঙ</h4>
                             <label for="qr-color">QR কোড রঙ:</label>
                             <input type="color" id="qr-color" value="#000000">
@@ -310,7 +336,7 @@
                             <input type="color" id="qr-bg-color" value="#ffffff">
                         </div>
 
-                        <div class="design-group">
+                        <div class="design-group qr-design-option">
                             <h4>স্টাইল</h4>
                             <label for="qr-dot-style">ডট স্টাইল:</label>
                             <select id="qr-dot-style">
@@ -327,7 +353,7 @@
                             </select>
                         </div>
                         
-                        <div class="design-group">
+                        <div class="design-group qr-design-option">
                             <h4>গ্র্যাডিয়েন্ট (ঐচ্ছিক)</h4>
                             <label for="qr-gradient-type">গ্র্যাডিয়েন্ট প্রকার:</label>
                             <select id="qr-gradient-type">
@@ -341,15 +367,15 @@
                             <input type="color" id="qr-gradient-color2" value="#000000">
                         </div>
 
-                        <div class="design-group">
+                        <div class="design-group" id="logo-design-group">
                             <h4>লোগো (ঐচ্ছিক)</h4>
                             <label for="logo-upload" class="upload-btn">লোগো আপলোড করুন <i class="fas fa-upload"></i></label>
                             <input type="file" id="logo-upload" accept="image/*" style="display: none;">
                             <button id="remove-logo" class="remove-btn" style="display: none;">লোগো সরান <i class="fas fa-times"></i></button>
                         </div>
 
-                        <div class="design-group full-width" id="resolution-design-group">
-                            <h4>রেজোলিউশন</h4>
+                        <div class="design-group full-width qr-design-option" id="resolution-design-group">
+                            <h4>QR কোড রেজোলিউশন</h4>
                             <input type="range" id="qr-resolution" min="300" max="4000" value="500">
                             <span id="resolution-display">500x500</span>
                         </div>
@@ -397,7 +423,7 @@
 
     <div id="faq-overlay" class="faq-overlay">
         <div class="faq-modal">
-            <button class="faq-close-btn">&times;</button>
+            <button class="faq-close-btn">×</button>
             <h2>সাধারণ জিজ্ঞাসা (QNA)</h2>
             <div class="faq-item">
                 <h3>QR কোড কি?</h3>
@@ -428,7 +454,7 @@
     
     <footer class="site-footer">
         <div class="container footer-content">
-            <p>&copy; 2025 QR Code & Bar Code Generator. All rights reserved.</p>
+            <p>© 2025 QR Code & Bar Code Generator. All rights reserved.</p>
             <p>Developed with ❤️ by FAHIM HASAN</p>
             <div class="social-links">
                 <a href="https://www.facebook.com/Fahim1256" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
