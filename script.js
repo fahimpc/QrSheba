@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoUpload = document.getElementById("logo-upload");
     const removeLogoBtn = document.getElementById("remove-logo");
     
-    // Barcode Quality Slider Elements
+    // Barcode Elements
+    const barcodeTypeSelect = document.getElementById("barcode-type");
+    const barcodeDataInput = document.getElementById("barcode-data");
     const barcodeQualitySlider = document.getElementById("barcode-quality");
     const barcodeQualityDisplay = document.getElementById("barcode-quality-display");
 
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showStep(currentStep);
         updateStepIndicators();
         activateQrType('text-url');
+        updateBarcodePlaceholder(); // Set initial placeholder
         generateCode(); 
         removeLogoBtn.style.display = 'none';
     }
@@ -78,6 +81,36 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             previewWrapper.classList.remove('barcode-mode');
         }
+    }
+
+    // --- Barcode Placeholder Logic (FIX) ---
+    function updateBarcodePlaceholder() {
+        const selectedType = barcodeTypeSelect.value;
+        let placeholderText = "বারকোডের ডেটা লিখুন";
+        switch (selectedType) {
+            case 'CODE128':
+                placeholderText = "যেকোনো ডেটা লিখুন";
+                break;
+            case 'EAN13':
+                placeholderText = "১২ বা ১৩ সংখ্যার ডিজিট (যেমন: 123456789012)";
+                break;
+            case 'UPC':
+                placeholderText = "১১ বা ১২ সংখ্যার ডিজিট (যেমন: 12345678901)";
+                break;
+            case 'CODE39':
+                placeholderText = "বড় হাতের অক্ষর, সংখ্যা, স্পেস ব্যবহার করুন";
+                break;
+            case 'ITF14':
+                placeholderText = "১৪ সংখ্যার ডিজিট (যেমন: 12345678901234)";
+                break;
+            case 'MSI':
+                placeholderText = "শুধুমাত্র সংখ্যা ব্যবহার করুন";
+                break;
+            case 'Pharmacode':
+                placeholderText = "৩ থেকে ১৩১০৭০ এর মধ্যে একটি সংখ্যা";
+                break;
+        }
+        barcodeDataInput.placeholder = placeholderText;
     }
 
     // --- Step Navigation Logic ---
@@ -118,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
             selectedQrType = type;
             showDataInputTab(type);
             updateDesignOptionsVisibility(type);
-            updatePreviewBoxStyle(type); // Control preview box style
+            updatePreviewBoxStyle(type); 
             generateCode(); 
         }
     }
@@ -356,7 +389,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function generateBarcode() {
-        const barcodeDataInput = document.getElementById("barcode-data");
         const data = barcodeDataInput.value;
         barcodeDisplay.innerHTML = '';
 
@@ -364,7 +396,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         
-        const barcodeTypeSelect = document.getElementById("barcode-type");
         const barcodeDisplayValueCheckbox = document.getElementById("barcode-display-value");
         const barcodeWidthInput = document.getElementById("barcode-width");
         const barcodeHeightInput = document.getElementById("barcode-height");
@@ -522,6 +553,12 @@ document.addEventListener("DOMContentLoaded", () => {
     allInputs.forEach(input => {
         const eventType = (input.type === 'color' || input.tagName === 'SELECT' || input.type === 'checkbox') ? 'change' : 'input';
         input.addEventListener(eventType, debounce(generateCode, 200));
+    });
+
+    // Event listener for barcode type change (FIX)
+    barcodeTypeSelect.addEventListener('change', () => {
+        updateBarcodePlaceholder();
+        generateCode(); // Regenerate barcode when type changes
     });
 
     qrResolutionSlider.addEventListener('input', debounce(() => {
