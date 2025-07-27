@@ -542,7 +542,7 @@ document.addEventListener("DOMContentLoaded", () => {
         logoFile = null;
         logoUpload.value = '';
         removeLogoBtn.style.display = 'none';
-        defaultIcons.forEach(icon => icon.classList.remove('selected')); // ADDED
+        defaultIcons.forEach(icon => icon.classList.remove('selected'));
 
         if (qrCodeInstance) {
             qrCodeInstance.clear();
@@ -559,10 +559,9 @@ document.addEventListener("DOMContentLoaded", () => {
         input.addEventListener(eventType, debounce(generateCode, 200));
     });
 
-    // Event listener for barcode type change (FIX)
     barcodeTypeSelect.addEventListener('change', () => {
         updateBarcodePlaceholder();
-        generateCode(); // Regenerate barcode when type changes
+        generateCode();
     });
 
     qrResolutionSlider.addEventListener('input', debounce(() => {
@@ -576,29 +575,36 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // UPDATED LOGIC
     logoUpload.addEventListener('change', (event) => {
-        defaultIcons.forEach(icon => icon.classList.remove('selected')); // ADDED
+        // When a custom logo is uploaded, deselect any default icon
+        defaultIcons.forEach(icon => icon.classList.remove('selected'));
+        
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
                 logoFile = e.target.result;
                 generateQRCode();
+                // Show the remove button
                 removeLogoBtn.style.display = 'inline-block';
             };
             reader.readAsDataURL(file);
         }
     });
 
+    // UPDATED LOGIC
     removeLogoBtn.addEventListener('click', () => {
-        defaultIcons.forEach(icon => icon.classList.remove('selected')); // ADDED
+        // This button now removes both custom logos and default icons
+        defaultIcons.forEach(icon => icon.classList.remove('selected'));
+        
         logoFile = null;
         logoUpload.value = '';
         generateQRCode();
         removeLogoBtn.style.display = 'none';
     });
 
-    // === NEW EVENT LISTENER FOR DEFAULT ICONS ===
+    // UPDATED LOGIC
     defaultIcons.forEach(icon => {
         icon.addEventListener('click', () => {
             // Remove selection from other icons
@@ -606,13 +612,15 @@ document.addEventListener("DOMContentLoaded", () => {
             // Add selection to the clicked icon
             icon.classList.add('selected');
 
-            // Reset custom logo upload
+            // Reset custom logo upload field
             logoUpload.value = ''; 
-            removeLogoBtn.style.display = 'none';
+            
+            // Show the single remove button
+            removeLogoBtn.style.display = 'inline-block';
 
             const iconPath = icon.dataset.iconPath;
-            logoFile = iconPath; // Set the logoFile to the path of the icon
-            generateQRCode(); // Regenerate the QR code with the new icon
+            logoFile = iconPath;
+            generateQRCode();
         });
     });
 
