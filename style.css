@@ -1120,3 +1120,67 @@ body {
         font-size: 2em;
     }
 }
+
+/* === NEW STYLES FOR DEFAULT ICONS === */
+.design-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.logo-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.logo-upload-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.or-divider {
+    text-align: center;
+    font-weight: 500;
+    color: var(--text-light);
+    margin: 10px 0;
+}
+
+.default-icons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 15px;
+    padding: 10px;
+    background-color: #f0f2f5;
+    border-radius: var(--border-radius-small);
+}
+
+.default-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    background-color: white;
+    border-radius: var(--border-radius-small);
+    border: 2px solid var(--border-light);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    padding: 5px;
+}
+
+.default-icon:hover {
+    transform: scale(1.1);
+    border-color: var(--primary-blue);
+}
+
+.default-icon.selected {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+    transform: scale(1.1);
+}
+
+.default-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}

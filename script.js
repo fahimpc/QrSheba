@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const barcodeQualitySlider = document.getElementById("barcode-quality");
     const barcodeQualityDisplay = document.getElementById("barcode-quality-display");
 
+    // New Default Icons
+    const defaultIcons = document.querySelectorAll(".default-icon");
+
     // New Currency Select Elements
     const bitcoinCurrency = document.getElementById("bitcoin-currency");
     const paypalCurrency = document.getElementById("paypal-currency");
@@ -539,6 +542,7 @@ document.addEventListener("DOMContentLoaded", () => {
         logoFile = null;
         logoUpload.value = '';
         removeLogoBtn.style.display = 'none';
+        defaultIcons.forEach(icon => icon.classList.remove('selected')); // ADDED
 
         if (qrCodeInstance) {
             qrCodeInstance.clear();
@@ -573,6 +577,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     logoUpload.addEventListener('change', (event) => {
+        defaultIcons.forEach(icon => icon.classList.remove('selected')); // ADDED
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
@@ -586,10 +591,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     removeLogoBtn.addEventListener('click', () => {
+        defaultIcons.forEach(icon => icon.classList.remove('selected')); // ADDED
         logoFile = null;
         logoUpload.value = '';
         generateQRCode();
         removeLogoBtn.style.display = 'none';
+    });
+
+    // === NEW EVENT LISTENER FOR DEFAULT ICONS ===
+    defaultIcons.forEach(icon => {
+        icon.addEventListener('click', () => {
+            // Remove selection from other icons
+            defaultIcons.forEach(i => i.classList.remove('selected'));
+            // Add selection to the clicked icon
+            icon.classList.add('selected');
+
+            // Reset custom logo upload
+            logoUpload.value = ''; 
+            removeLogoBtn.style.display = 'none';
+
+            const iconPath = icon.dataset.iconPath;
+            logoFile = iconPath; // Set the logoFile to the path of the icon
+            generateQRCode(); // Regenerate the QR code with the new icon
+        });
     });
 
     downloadPngBtn.addEventListener('click', () => {
