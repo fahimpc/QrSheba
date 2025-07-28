@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qr Sheba Free Qr code & Bar Code Generator - Free, Fast & Customizable</title>
     <meta name="description" content="Create highly customizable QR codes for WiFi, vCards, text, URLs, emails, SMS, phone numbers, locations, events, PayPal, Bitcoin, and app downloads. Generate barcodes for various data types. Our free online QR code generator offers advanced design options including custom colors, gradients, dot styles, corner styles, logo integration, and adjustable resolution for high-quality PNG, SVG, and JPG downloads. Generate advanced QR codes for marketing, business, personal use, and more. Fast, easy, and secure QR code creation.">
-    <meta name="keywords" content="Qr Sheba Free QR code generator, free QR code maker, customizable QR code, QR code for WiFi, vCard QR code, email QR code, SMS QR code, phone QR code, location QR code, event QR code, PayPal QR code, Bitcoin QR code, app download QR code, QR code colors, gradient QR code, high resolution QR code, PNG QR code, SVG QR code, JPG QR code, online QR generator, QR code for business, marketing QR code, secure QR code, custom QR code, best QR code generator, barcode generator, free barcode maker, customizable barcode, EAN-13, UPC-A, Code 128, Code 39, ISBN, QR and Barcode">
+    <meta name="keywords" content="Qr Sheba Free QR code generator, free QR code maker, customizable QR code, QR code for WiFi, vCard QR code, email QR code, SMS QR code, phone QR code, location QR code, event QR code, PayPal QR code, Bitcoin QR code, bKash QR, Nagad QR, app download QR code, QR code colors, gradient QR code, high resolution QR code, PNG QR code, SVG QR code, JPG QR code, online QR generator, QR code for business, marketing QR code, secure QR code, custom QR code, best QR code generator, barcode generator, free barcode maker, customizable barcode, EAN-13, UPC-A, Code 128, Code 39, ISBN, QR and Barcode">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta property="og:title" content="QR Sheba Qr Code & Bar Code Generator - Create Free & Customizable QR Codes">
     <meta property="og:description" content="Qr Sheba Create highly customizable QR codes for WiFi, vCards, text, URLs, emails, SMS, phone numbers, locations, events, PayPal, Bitcoin, and app downloads. Generate barcodes for various data types. Our free online QR code generator offers advanced design options including custom colors, gradients, dot styles, corner styles, logo integration, and adjustable resolution for high-quality PNG, SVG, and JPG downloads. Generate advanced QR codes for marketing, business, personal use, and more. Fast, easy, and secure QR code creation.">
@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="favicon.png" type="image/png">
     
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
@@ -79,6 +79,16 @@
                             <i class="fas fa-link"></i>
                             <h3>লিঙ্ক / টেক্সট</h3>
                             <p>ওয়েবসাইট URL বা সাধারণ টেক্সট</p>
+                        </div>
+                        <div class="qr-type-card" data-type="bkash">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                            <h3>বিকাশ</h3>
+                            <p>bKash পেমেন্ট</p>
+                        </div>
+                        <div class="qr-type-card" data-type="nagad">
+                            <i class="fas fa-wallet"></i>
+                            <h3>নগদ</h3>
+                            <p>Nagad পেমেন্ট</p>
                         </div>
                         <div class="qr-type-card" data-type="wifi">
                             <i class="fas fa-wifi"></i>
@@ -145,6 +155,25 @@
                         <div id="text-url-tab" class="data-input-tab active">
                             <h3><i class="fas fa-link"></i> লিঙ্ক / টেক্সট</h3>
                             <input type="text" id="text-url-input" placeholder="আপনার লিঙ্ক বা টেক্সট লিখুন">
+                        </div>
+
+                        <div id="bkash-tab" class="data-input-tab">
+                            <h3><i class="fa-solid fa-hand-holding-dollar"></i> বিকাশ পেমেন্ট QR কোড</h3>
+                            <input type="tel" id="bkash-number" placeholder="বিকাশ অ্যাকাউন্ট নম্বর">
+                            <input type="number" id="bkash-amount" placeholder="টাকার পরিমাণ (ঐচ্ছিক)" step="0.01">
+                            <input type="text" id="bkash-reference" placeholder="রেফারেন্স (ঐচ্ছিক)">
+                             <p class="input-note">
+                                 (নোট: পার্সোনাল ও মার্চেন্ট উভয় নম্বরে কাজ করে।)
+                             </p>
+                        </div>
+
+                        <div id="nagad-tab" class="data-input-tab">
+                             <h3><i class="fas fa-wallet"></i> নগদ পেমেন্ট QR কোড</h3>
+                             <input type="tel" id="nagad-number" placeholder="নগদ মার্চেন্ট অ্যাকাউন্ট নম্বর">
+                             <input type="number" id="nagad-amount" placeholder="টাকার পরিমাণ (ঐচ্ছিক)" step="0.01">
+                             <p class="input-note">
+                                 (নোট: এই সুবিধাটি বর্তমানে শুধুমাত্র নগদ মার্চেন্ট নম্বরের জন্য কাজ করে।)
+                             </p>
                         </div>
 
                         <div id="wifi-tab" class="data-input-tab">
@@ -398,6 +427,9 @@
                                     <div class="default-icon" data-icon-path="icons/chrome-color-svgrepo-com.svg"><img src="icons/chrome-color-svgrepo-com.svg" alt="Chrome Icon"></div>
                                     <div class="default-icon" data-icon-path="icons/playstore-svgrepo-com.svg"><img src="icons/playstore-svgrepo-com.svg" alt="PlayStore Icon"></div>
                                     <div class="default-icon" data-icon-path="icons/sms-svgrepo-com.svg"><img src="icons/sms-svgrepo-com.svg" alt="SMS Icon"></div>
+                                    <div class="default-icon" data-icon-path="icons/bkash-svgrepo-com.svg"><img src="icons/bkash-svgrepo-com.svg" alt="Bkash Icon"></div>
+                                    <div class="default-icon" data-icon-path="icons/nagad-svgrepo-com.svg"><img src="icons/nagad-svgrepo-com.svg" alt="Nagad Icon"></div>
+                                    <div class="default-icon" data-icon-path="icons/qrsheba-svgrepo-com.svg"><img src="icons/qrsheba-svgrepo-com.svg" alt="QrSheba Icon"></div>
                                 </div>
                             </div>
                         </div>
@@ -459,7 +491,7 @@
             </div>
             <div class="faq-item">
                 <h3>এই জেনারেটর ব্যবহার করে কী ধরনের QR কোড তৈরি করা যায়?</h3>
-                <p>আপনি লিঙ্ক/টেক্সট, Wi-Fi, vCard, ইমেইল, SMS, ফোন, লোকেশন, ইভেন্ট, PayPal, Bitcoin এবং অ্যাপ ডাউনলোডের জন্য QR কোড তৈরি করতে পারবেন।</p>
+                <p>আপনি লিঙ্ক/টেক্সট, বিকাশ, নগদ, Wi-Fi, vCard, ইমেইল, SMS, ফোন, লোকেশন, ইভেন্ট, PayPal, Bitcoin এবং অ্যাপ ডাউনলোডের জন্য QR কোড তৈরি করতে পারবেন।</p>
             </div>
             <div class="faq-item">
                 <h3>QR কোড কাস্টমাইজ করার জন্য কি কি অপশন আছে?</h3>

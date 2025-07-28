@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- Barcode Placeholder Logic (FIX) ---
+    // --- Barcode Placeholder Logic ---
     function updateBarcodePlaceholder() {
         const selectedType = barcodeTypeSelect.value;
         let placeholderText = "বারকোডের ডেটা লিখুন";
@@ -204,6 +204,74 @@ document.addEventListener("DOMContentLoaded", () => {
             case 'text-url':
                 data = document.getElementById("text-url-input").value;
                 break;
+            case 'bkash':
+                const bkashNumber = document.getElementById("bkash-number").value.replace(/\D/g, '');
+                if (!bkashNumber) return "";
+                const bkashAmount = document.getElementById("bkash-amount").value;
+                const bkashReference = document.getElementById("bkash-reference").value;
+                
+                const payload = [
+                    '000201',
+                    '010212',
+                    '26' + (33 + bkashNumber.length).toString().padStart(2, '0'),
+                        '0004com.',
+                        '0105bkash',
+                        '02' + bkashNumber.length.toString().padStart(2, '0') + bkashNumber,
+                    '52040000',
+                    '5303050',
+                ];
+
+                if (bkashAmount) {
+                    const amountStr = parseFloat(bkashAmount).toFixed(2);
+                    payload.push('54' + amountStr.length.toString().padStart(2, '0') + amountStr);
+                }
+                
+                if (bkashReference) {
+                    const refStr = bkashReference.replace(/[^a-zA-Z0-9]/g, ''); // Alphanumeric ref
+                     if(refStr){
+                        payload.push('05' + refStr.length.toString().padStart(2, '0') + refStr);
+                     }
+                }
+                
+                payload.push('5802BD');
+                payload.push('62' + ('07' + 'QrSheba'.length).toString().padStart(2, '0') + '0107QrSheba'); // Bill Number
+                payload.push('6304');
+
+                const payloadString = payload.join('');
+                const crc = calculateCRC16(payloadString).toString(16).toUpperCase().padStart(4, '0');
+                
+                data = payloadString + crc;
+                break;
+
+            case 'nagad':
+                const nagadNumber = document.getElementById("nagad-number").value.replace(/\D/g, '');
+                if (!nagadNumber) return "";
+                const nagadAmount = document.getElementById("nagad-amount").value;
+                
+                const nagadPayload = [
+                    '000201',
+                    '010212',
+                    '26' + (32 + nagadNumber.length).toString().padStart(2, '0'),
+                        '0004com.',
+                        '0105nagad',
+                        '02' + nagadNumber.length.toString().padStart(2, '0') + nagadNumber,
+                    '52040000',
+                    '5303050',
+                ];
+
+                if (nagadAmount) {
+                    const amountStr = parseFloat(nagadAmount).toFixed(2);
+                    nagadPayload.push('54' + amountStr.length.toString().padStart(2, '0') + amountStr);
+                }
+                
+                nagadPayload.push('5802BD');
+                nagadPayload.push('6304');
+
+                const nagadPayloadString = nagadPayload.join('');
+                const nagadCrc = calculateCRC16(nagadPayloadString).toString(16).toUpperCase().padStart(4, '0');
+
+                data = nagadPayloadString + nagadCrc;
+                break;
             case 'wifi':
                 const ssid = document.getElementById("wifi-ssid").value;
                 if (!ssid) return "";
@@ -312,10 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const androidUrl = document.getElementById("app-android-url").value;
                 const iosUrl = document.getElementById("app-ios-url").value;
                 if (!androidUrl && !iosUrl) return "";
-                let appData = '';
-                if (androidUrl) appData += `ANDROID:${androidUrl}\n`;
-                if (iosUrl) appData += `IOS:${iosUrl}\n`;
-                data = appData;
+                data = androidUrl || iosUrl;
                 break;
             case 'barcode':
                 data = document.getElementById("barcode-data").value;
@@ -424,7 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Download Functions ---
     function downloadQRCode(format) {
         if (qrCodeInstance && selectedQrType !== 'barcode' && getDataForType(selectedQrType)) {
-            qrCodeInstance.download({ name: `qr-code-${selectedQrType}`, extension: format });
+            qrCodeInstance.download({ name: `qrsheba-${selectedQrType}`, extension: format });
         } else {
             alert("কোনো QR কোড তৈরি হয়নি অথবা ডেটা প্রবেশ করানো হয়নি!");
         }
@@ -575,49 +640,34 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // UPDATED LOGIC
     logoUpload.addEventListener('change', (event) => {
-        // When a custom logo is uploaded, deselect any default icon
         defaultIcons.forEach(icon => icon.classList.remove('selected'));
-        
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
                 logoFile = e.target.result;
                 generateQRCode();
-                // Show the remove button
                 removeLogoBtn.style.display = 'inline-block';
             };
             reader.readAsDataURL(file);
         }
     });
 
-    // UPDATED LOGIC
     removeLogoBtn.addEventListener('click', () => {
-        // This button now removes both custom logos and default icons
         defaultIcons.forEach(icon => icon.classList.remove('selected'));
-        
         logoFile = null;
         logoUpload.value = '';
         generateQRCode();
         removeLogoBtn.style.display = 'none';
     });
 
-    // UPDATED LOGIC
     defaultIcons.forEach(icon => {
         icon.addEventListener('click', () => {
-            // Remove selection from other icons
             defaultIcons.forEach(i => i.classList.remove('selected'));
-            // Add selection to the clicked icon
             icon.classList.add('selected');
-
-            // Reset custom logo upload field
             logoUpload.value = ''; 
-            
-            // Show the single remove button
             removeLogoBtn.style.display = 'inline-block';
-
             const iconPath = icon.dataset.iconPath;
             logoFile = iconPath;
             generateQRCode();
@@ -648,3 +698,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial setup
     initializeGenerator();
 });
+
+// Helper function to calculate CRC16 checksum for Bangla QR
+function calculateCRC16(data) {
+    let crc = 0xFFFF;
+    for (let i = 0; i < data.length; i++) {
+        crc ^= data.charCodeAt(i) << 8;
+        for (let j = 0; j < 8; j++) {
+            crc = (crc & 0x8000) ? (crc << 1) ^ 0x1021 : crc << 1;
+        }
+    }
+    return crc & 0xFFFF;
+}

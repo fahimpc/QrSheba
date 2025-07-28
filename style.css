@@ -394,6 +394,14 @@ body {
     color: var(--text-dark);
 }
 
+.input-note {
+    font-size: 0.8em; 
+    color: var(--text-light); 
+    text-align: center; 
+    margin-top: -5px;
+    margin-bottom: 15px;
+}
+
 /* Checkbox specific styling */
 .checkbox-container {
     display: flex;
