@@ -1192,3 +1192,52 @@ body {
     max-height: 100%;
     object-fit: contain;
 }
+
+/* === Styles for Global Voice Input Button === */
+.global-voice-container {
+    text-align: center;
+    margin: 10px 0 20px 0;
+    padding: 20px;
+    background-color: #e6f2ff;
+    border-radius: var(--border-radius-medium);
+    border: 2px dashed var(--primary-blue);
+}
+
+.voice-trigger-btn {
+    font-size: 1.2em;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, var(--primary-green), var(--accent-color));
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    border-radius: 50px;
+    gap: 15px;
+}
+
+.voice-trigger-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+}
+
+.voice-trigger-btn.listening i {
+    animation: voicePulse 1.5s infinite;
+    color: #ffc107;
+}
+
+.voice-status-text {
+    margin-top: 15px;
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 1.1em;
+    min-height: 20px;
+}
+
+@keyframes voicePulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

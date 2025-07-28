@@ -697,6 +697,80 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initial setup
     initializeGenerator();
+
+    // --- Global Voice Input (AI) to Auto-Generate QR ---
+    const globalVoiceBtn = document.getElementById("global-voice-btn");
+    const globalVoiceStatus = document.getElementById("global-voice-status");
+    const textUrlInputForGlobal = document.getElementById("text-url-input");
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+        const globalRecognition = new SpeechRecognition();
+        globalRecognition.continuous = false;
+        globalRecognition.lang = 'bn-BD'; // Default to Bengali, but supports others
+        globalRecognition.interimResults = false;
+        globalRecognition.maxAlternatives = 1;
+
+        globalVoiceBtn.addEventListener("click", () => {
+            if (globalVoiceBtn.classList.contains('listening')) {
+                globalRecognition.stop();
+                return;
+            }
+            try {
+                globalRecognition.start();
+            } catch (error) {
+                console.error("Could not start recognition:", error);
+                globalVoiceStatus.textContent = "ভয়েস সার্ভিস শুরু করা যায়নি। ব্রাউজার পারমিশন চেক করুন।";
+            }
+        });
+
+        globalRecognition.onstart = () => {
+            globalVoiceBtn.classList.add("listening");
+            globalVoiceStatus.textContent = "শুনছি... আপনার কাঙ্ক্ষিত টেক্সট বলুন।";
+        };
+
+        globalRecognition.onend = () => {
+            globalVoiceBtn.classList.remove("listening");
+            globalVoiceStatus.textContent = "";
+        };
+
+        globalRecognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+
+            // 1. Activate the 'text-url' type automatically
+            activateQrType('text-url');
+
+            // 2. Set the input value
+            textUrlInputForGlobal.value = transcript;
+
+            // 3. Generate the QR Code
+            generateCode();
+
+            // 4. Automatically move to the design step (Step 3) to show the result
+            showStep(3);
+
+            globalVoiceStatus.textContent = `"${transcript}"-এর জন্য QR কোড তৈরি হয়েছে!`;
+        };
+
+        globalRecognition.onerror = (event) => {
+            console.error("Global Speech recognition error:", event.error);
+            globalVoiceBtn.classList.remove("listening");
+            if (event.error === 'no-speech') {
+                globalVoiceStatus.textContent = "কোনো কথা শোনা যায়নি। আবার চেষ্টা করুন।";
+            } else if (event.error === 'not-allowed') {
+                globalVoiceStatus.textContent = "মাইক্রোফোন ব্যবহারের অনুমতি প্রয়োজন।";
+            } else {
+                globalVoiceStatus.textContent = "দুঃখিত, একটি সমস্যা হয়েছে।";
+            }
+        };
+
+    } else {
+        console.warn("Speech Recognition not supported in this browser.");
+        if(document.querySelector('.global-voice-container')) {
+            document.querySelector('.global-voice-container').style.display = 'none'; // Hide the feature if not supported
+        }
+    }
 });
 
 // Helper function to calculate CRC16 checksum for Bangla QR
