@@ -46,13 +46,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.querySelector(".menu-toggle");
     const mainNav = document.querySelector(".main-nav");
 
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById("dark-mode-toggle");
+
     let currentStep = 1;
     let selectedQrType = 'text-url';
     let logoFile = null;
     let qrCodeInstance = null;
 
+    // --- Dark Mode Logic ---
+    function setDarkMode(isDark) {
+        if (isDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    function toggleDarkMode() {
+        const currentTheme = localStorage.getItem('theme');
+        setDarkMode(currentTheme !== 'dark');
+    }
+
     // --- Initialization ---
     function initializeGenerator() {
+        // Apply saved theme on page load
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (savedTheme === null && systemPrefersDark)) {
+            setDarkMode(true);
+        } else {
+            setDarkMode(false);
+        }
+
         showStep(currentStep);
         updateStepIndicators();
         activateQrType('text-url');
@@ -562,6 +591,9 @@ document.addEventListener("DOMContentLoaded", () => {
             timeout = setTimeout(() => func.apply(context, args), delay);
         };
     }
+    
+    // Dark Mode Listener
+    darkModeToggle.addEventListener('click', toggleDarkMode);
 
     menuToggle.addEventListener('click', () => mainNav.classList.toggle('active'));
 

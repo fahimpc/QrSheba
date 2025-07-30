@@ -14,7 +14,34 @@
     --border-radius-large: 25px;
     --font-primary: 'Poppins', sans-serif;
     --font-secondary: 'Noto Sans Bengali', sans-serif;
+    --bg-white: #ffffff;
+    --bg-panel: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #e9ecef;
+    --card-bg: #ffffff;
+    --card-border: #e9ecef;
+    --faq-modal-bg: #ffffff;
 }
+
+[data-theme="dark"] {
+    --primary-blue: #0088ff;
+    --primary-green: #32be54;
+    --accent-color: #8a63d2;
+    --text-dark: #e4e6eb;
+    --text-light: #b0b3b8;
+    --bg-light: #18191a;
+    --border-light: #3a3b3c;
+    --shadow-light: rgba(255, 255, 255, 0.08);
+    --shadow-medium: rgba(255, 255, 255, 0.15);
+    --bg-white: #242526;
+    --bg-panel: #242526;
+    --input-bg: #3a3b3c;
+    --input-border: #4e4f50;
+    --card-bg: #242526;
+    --card-border: #3a3b3c;
+    --faq-modal-bg: #242526;
+}
+
 
 /* Universal Box-Sizing */
 *, *::before, *::after {
@@ -25,6 +52,7 @@
 
 body {
     overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* Base HTML & Body Styles */
@@ -85,6 +113,11 @@ body {
     transform: scale(1.05);
 }
 
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
 .main-nav a {
     color: white;
     text-decoration: none;
@@ -123,6 +156,47 @@ body {
     cursor: pointer;
 }
 
+/* Dark Mode Toggle Button */
+.dark-mode-toggle-btn {
+    background: none;
+    border: 2px solid white;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 25px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle-btn i {
+    position: absolute;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.dark-mode-toggle-btn .fa-sun {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+[data-theme="dark"] .dark-mode-toggle-btn .fa-sun {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+[data-theme="dark"] .dark-mode-toggle-btn .fa-moon {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+
 /* Hero Section */
 .hero-section {
     background: linear-gradient(135deg, #1a75ff, #00c6ff);
@@ -148,7 +222,7 @@ body {
 
 /* Generator Container */
 .generator-container {
-    background-color: white;
+    background-color: var(--bg-panel);
     border-radius: var(--border-radius-medium);
     box-shadow: 0 10px 30px var(--shadow-light);
     margin: 40px auto;
@@ -185,7 +259,7 @@ body {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background-color: var(--border-light);
+    background-color: var(--input-bg);
     color: var(--text-light);
     font-weight: 600;
     font-size: 1.2em;
@@ -258,7 +332,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 25px;
-    background-color: #ffffff;
+    background-color: var(--bg-panel);
     border-radius: var(--border-radius-medium);
     box-shadow: 0 5px 20px var(--shadow-light);
     position: sticky;
@@ -293,25 +367,25 @@ body {
 }
 
 .qr-type-card {
-    background-color: white;
-    border: 2px solid var(--border-light);
+    background-color: var(--card-bg);
+    border: 2px solid var(--card-border);
     border-radius: var(--border-radius-small);
     padding: 20px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px var(--shadow-light);
 }
 
 .qr-type-card:hover {
     border-color: var(--primary-blue);
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 15px var(--shadow-medium);
 }
 
 .qr-type-card.active {
     border-color: var(--primary-blue);
-    background-color: #e6f2ff;
+    background-color: rgba(0, 123, 255, 0.1);
     box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
 }
 
@@ -364,13 +438,13 @@ body {
     width: 100%;
     padding: 12px 18px;
     margin-bottom: 15px;
-    border: 1px solid var(--border-light);
+    border: 1px solid var(--input-border);
     border-radius: var(--border-radius-large);
     font-size: 1em;
     color: var(--text-dark);
-    background-color: white;
+    background-color: var(--input-bg);
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s, color 0.3s;
     box-sizing: border-box;
 }
 
@@ -450,11 +524,11 @@ body {
 }
 
 .design-group {
-    background-color: white;
+    background-color: var(--bg-white);
     border: 1px solid var(--border-light);
     border-radius: var(--border-radius-small);
     padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px var(--shadow-light);
 }
 
 .design-group.hidden {
@@ -496,7 +570,7 @@ body {
     border-radius: var(--border-radius-small);
     font-size: 1em;
     color: var(--text-dark);
-    background-color: white;
+    background-color: var(--input-bg);
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -611,6 +685,8 @@ body {
     padding: 8px;
     border-radius: var(--border-radius-small);
     border: 1px solid var(--border-light);
+    background-color: var(--input-bg);
+    color: var(--text-dark);
 }
 
 .barcode-design-options input[type="color"] {
@@ -738,7 +814,7 @@ body {
 /* QR Preview Panel (Right Panel) */
 .qr-preview-wrapper {
     width: 100%;
-    background-color: white;
+    background-color: var(--bg-white);
     border: 2px dashed var(--border-light);
     border-radius: var(--border-radius-medium);
     display: flex;
@@ -844,7 +920,7 @@ body {
 }
 
 .faq-modal {
-    background-color: white;
+    background-color: var(--faq-modal-bg);
     padding: 40px;
     border-radius: var(--border-radius-medium);
     box-shadow: 0 10px 30px var(--shadow-medium);
@@ -855,7 +931,7 @@ body {
     position: relative;
     transform: translateY(20px);
     opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s;
 }
 
 .faq-overlay.active .faq-modal {
@@ -917,6 +993,12 @@ body {
     color: white;
     padding: 30px 0;
     margin-top: auto;
+    transition: background-color 0.3s;
+}
+
+[data-theme="dark"] .site-footer {
+    background-color: #18191a;
+    color: #e4e6eb;
 }
 
 .footer-content {
@@ -998,6 +1080,7 @@ body {
         background: linear-gradient(90deg, var(--primary-blue), var(--accent-color));
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         padding: 15px 0;
+        align-items: flex-start;
     }
 
     .main-nav.active {
@@ -1007,6 +1090,10 @@ body {
     .main-nav a {
         margin: 10px 20px;
         text-align: center;
+    }
+    
+    .dark-mode-toggle-btn {
+        margin: 10px 20px;
     }
 
     .menu-toggle {
@@ -1065,7 +1152,7 @@ body {
     }
     .primary-btn, .secondary-btn, .start-over-btn {
         width: 100%;
-        text-align: center;
+        justify-content: center;
     }
 
     .faq-modal {
@@ -1163,12 +1250,16 @@ body {
     border-radius: var(--border-radius-small);
 }
 
+[data-theme="dark"] .default-icons-grid {
+    background-color: #3a3b3c;
+}
+
 .default-icon {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 60px;
-    background-color: white;
+    background-color: var(--bg-white);
     border-radius: var(--border-radius-small);
     border: 2px solid var(--border-light);
     cursor: pointer;
@@ -1198,7 +1289,7 @@ body {
     text-align: center;
     margin: 10px 0 20px 0;
     padding: 20px;
-    background-color: #e6f2ff;
+    background-color: rgba(0, 123, 255, 0.1);
     border-radius: var(--border-radius-medium);
     border: 2px dashed var(--primary-blue);
 }
