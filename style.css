@@ -612,6 +612,18 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
+/* নতুন সংযোজন: Advanced Options Container */
+.advanced-options-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+}
+.advanced-options-container .input-group {
+    display: flex;
+    flex-direction: column;
+}
+
 #resolution-display {
     display: block;
     text-align: center;
@@ -737,6 +749,13 @@ body {
     color: white;
     text-align: center;
 }
+/* নতুন সংযোজন: Disabled state for download button */
+.download-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
 
 .download-png {
     background: linear-gradient(45deg, #007bff, #00c6ff);
@@ -749,7 +768,7 @@ body {
     color: var(--text-dark);
 }
 
-.download-btn:hover {
+.download-btn:not(:disabled):hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px var(--shadow-medium);
     opacity: 0.9;
@@ -812,6 +831,15 @@ body {
 
 
 /* QR Preview Panel (Right Panel) */
+#qr-code-frame-container {
+    padding: 15px;
+    border-radius: var(--border-radius-medium);
+    margin-bottom: 20px;
+    background-color: var(--bg-white);
+    box-shadow: 0 5px 20px var(--shadow-light);
+    transition: all 0.3s ease;
+}
+
 .qr-preview-wrapper {
     width: 100%;
     background-color: var(--bg-white);
@@ -820,7 +848,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
     box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
     min-height: 200px;
     min-width: 200px;
@@ -873,6 +901,44 @@ body {
     color: var(--border-light);
 }
 
+/* নতুন সংযোজন: Frame Text Preview Style */
+.frame-text-preview {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2em;
+    padding: 10px 5px;
+    border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
+    display: none; /* Hidden by default */
+    margin-top: -1px; /* To overlap with the preview wrapper border */
+}
+
+/* নতুন সংযোজন: Frame Options Panel */
+#frame-options-panel {
+    width: 100%;
+    margin-top: 10px;
+}
+#frame-options-panel input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--border-radius-small);
+    border: 1px solid var(--border-light);
+    margin-bottom: 10px;
+}
+
+/* নতুন সংযোজন: Action Buttons Wrapper */
+.action-buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+.action-buttons-wrapper .secondary-btn,
+.action-buttons-wrapper .faq-toggle-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0;
+}
+
 
 /* FAQ Section */
 .faq-toggle-btn {
@@ -897,7 +963,7 @@ body {
     box-shadow: 0 6px 20px rgba(23, 162, 184, 0.4);
 }
 
-/* FAQ Modal */
+/* FAQ & Scanner Modal */
 .faq-overlay {
     position: fixed;
     top: 0;
@@ -987,6 +1053,25 @@ body {
     line-height: 1.8;
 }
 
+/* নতুন সংযোজন: QR Scanner Styles */
+#qr-reader {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 2px solid var(--border-light);
+    border-radius: var(--border-radius-small);
+    overflow: hidden;
+}
+.scanner-result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius-small);
+    word-break: break-all;
+    text-align: center;
+    font-weight: 500;
+}
+
 /* Footer */
 .site-footer {
     background-color: var(--text-dark);
@@ -1066,6 +1151,10 @@ body {
     }
     .step-indicator p {
         font-size: 0.8em;
+    }
+
+    .advanced-options-container {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1331,4 +1420,25 @@ body {
     100% {
         transform: scale(1);
     }
+}
+
+/* নতুন সংযোজন: Design Template Button Styles */
+.design-templates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+}
+.design-template-btn {
+    padding: 10px 15px;
+    border-radius: var(--border-radius-small);
+    border: 2px solid var(--border-light);
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.design-template-btn:hover {
+    border-color: var(--primary-blue);
+    background-color: rgba(0, 123, 255, 0.1);
 }
